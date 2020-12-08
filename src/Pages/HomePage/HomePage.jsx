@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
+import './HomePage.css'
+import PageCard from '../../Components/CardComponent/PageCard'
 import {Row,Col} from 'react-bootstrap'
 const HomePage = () => {
     const [pages,setPages] =useState([])
@@ -15,13 +17,14 @@ const HomePage = () => {
     return (
         <>  
         <div>
-            <h3>Click on a card to know more</h3>
+            <h2 className='title'>Our Customers' websites</h2>
+            <h3 className='sub-title'>Click on a card to know more</h3>
         </div>
         <Row>
             {pages.map((page)=> {
                 return (
-                    <Col key={page.id}>
-                         {page.title} 
+                    <Col key={page.id} className='align-items-stretch d-flex'  sm={12} md={6} xl={3}>
+                         <PageCard page={page}/> 
                          </Col>
                 )
             })}
