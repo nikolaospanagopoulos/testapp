@@ -1,26 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios'
+import React, { useEffect} from 'react';
 import './HomePage.css'
+import {useDispatch,useSelector} from 'react-redux'
 import PageCard from '../../Components/CardComponent/PageCard'
 import {Row,Col} from 'react-bootstrap'
+import {listPages} from '../../actions/pagesActions'
+
+
 const HomePage = () => {
-    const [pages,setPages] =useState([])
+    const dispatch = useDispatch()
+
+    const pageList = useSelector(state => state.pageList)
+    const {loading,error,pages} = pageList
 
     useEffect(()=>{
-        const fetchPages = async ()=> {
-            const {data} = await axios.get('https://pagesmanagement.azurewebsites.net/api/ResponsivePages')
-            setPages(data)
-           
-        }
-        fetchPages()
-    },[])
+        dispatch(listPages())
+    },[dispatch])
+
+
     return (
         <>  
-        <div>
+        
             <h2 className='title'>Our Customers' websites</h2>
             <h3 className='sub-title'>Click on a card to know more</h3>
-        </div>
-        <Row>
+        {loading ? <h2>Loading ... </h2> : error ? <h3> {error} </h3> : (
+            <Row>
             {pages.map((page)=> {
                 return (
                     <Col key={page.id} className='align-items-stretch d-flex'  sm={12} md={6} xl={3}>
@@ -29,6 +32,8 @@ const HomePage = () => {
                 )
             })}
         </Row>
+        )}
+        
         </>
     );
 }
