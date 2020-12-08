@@ -1,5 +1,7 @@
 import React, { useEffect} from 'react';
 import './HomePage.css'
+import Loader from '../../Components/LoadingComponent/LoadingComponent'
+import Message from '../../Components/MessageComponent/Message'
 import {useDispatch,useSelector} from 'react-redux'
 import PageCard from '../../Components/CardComponent/PageCard'
 import {Row,Col} from 'react-bootstrap'
@@ -22,7 +24,7 @@ const HomePage = () => {
         
             <h2 className='title'>Our Customers' websites</h2>
             <h3 className='sub-title'>Click on a card to know more</h3>
-        {loading ? <h2>Loading ... </h2> : error ? <h3> {error} </h3> : (
+        {loading ? <Loader/> : error ? (<Message variant = 'danger'> {error} </Message>) : (
             <Row>
             {pages.map((page)=> {
                 return (
