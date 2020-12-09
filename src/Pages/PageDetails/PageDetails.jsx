@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col,ListGroup, Button } from "react-bootstrap";
+import { Row, Col,ListGroup} from "react-bootstrap";
 import { listPageDetails } from "../../actions/pagesActions";
 import { Link } from "react-router-dom";
 import Loader from '../../Components/LoadingComponent/LoadingComponent'

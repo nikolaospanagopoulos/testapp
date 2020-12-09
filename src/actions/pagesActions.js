@@ -1,4 +1,4 @@
-import {PAGES_LIST_REQUEST,PAGES_LIST_SUCCESS,PAGES_LIST_FAIL, PAGES_DETAILS_REQUEST, PAGES_DETAILS_SUCCESS, PAGES_DETAILS_FAIL, PAGES_DELETE_REQUEST, PAGES_DELETE_SUCCESS, PAGES_DELETE_FAIL} from '../constants/pagesConstants'
+import {PAGES_LIST_REQUEST,PAGES_LIST_SUCCESS,PAGES_LIST_FAIL, PAGES_DETAILS_REQUEST, PAGES_DETAILS_SUCCESS, PAGES_DETAILS_FAIL, PAGES_DELETE_REQUEST, PAGES_DELETE_SUCCESS, PAGES_DELETE_FAIL,PAGES_CREATE_REQUEST,PAGES_CREATE_SUCCESS,PAGES_CREATE_FAIL} from '../constants/pagesConstants'
 import axios from 'axios'
 
 export const listPages = () => async (dispatch) => {
@@ -51,6 +51,32 @@ export const deletePage = (id) => async (dispatch) => {
     }catch(error){
         dispatch({
             type:PAGES_DELETE_FAIL,
+            payload:error.response && error.response.data.message ? error.response.data.message : error.message
+        })
+    }
+}
+
+export const createPage = () => async (dispatch) => {
+    try{
+        dispatch({type:PAGES_CREATE_REQUEST})
+
+         const {data} = await axios.post(`https://pagesmanagement.azurewebsites.net/api/ResponsivePages`,{
+
+            "title": "created website",
+            "description": "waiting for editing",
+            "type": 0,
+            "isActive": true,
+            "publishedOn": "2020-12-08T23:02:00.6306104+00:00"
+         })
+
+        dispatch({
+            type:PAGES_CREATE_SUCCESS,
+            payload:data
+            
+        })
+    }catch(error){
+        dispatch({
+            type:PAGES_CREATE_FAIL,
             payload:error.response && error.response.data.message ? error.response.data.message : error.message
         })
     }

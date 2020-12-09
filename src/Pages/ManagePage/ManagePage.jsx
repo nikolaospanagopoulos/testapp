@@ -4,9 +4,9 @@ import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../Components/LoadingComponent/LoadingComponent";
 import Message from "../../Components/MessageComponent/Message";
-import { listPages,deletePage } from "../../actions/pagesActions";
-
-const ManagePage = ({ match }) => {
+import { listPages,deletePage,createPage } from "../../actions/pagesActions";
+import {PAGES_CREATE_RESET} from '../../constants/pagesConstants'
+const ManagePage = ({ match,history }) => {
   const dispatch = useDispatch();
   const pageList = useSelector((state) => state.pageList);
   const { loading, error, pages } = pageList;
@@ -14,20 +14,28 @@ const ManagePage = ({ match }) => {
   const pageDelete = useSelector((state) => state.pageDelete);
   const { loading:loadingDelete, error:errorDelete ,success:successDelete} = pageDelete;
 
+  const pageCreate = useSelector((state) => state.pageCreate);
+  const { loading:loadingCreate, error:errorCreate ,success:successCreate,page:createdPage} = pageCreate;
 
 
   useEffect(() => {
-    dispatch(listPages());
-  }, [dispatch,successDelete]);
+    dispatch({type:PAGES_CREATE_RESET})
+    if(successCreate){
+      history.push(`/admin/page/${createdPage.id}/edit`)
+    }else{
+      dispatch(listPages());
+    }
+    
+  }, [dispatch,successDelete,history,successCreate,createPage]);
 
-  const deleteHandler = (id) => {
+  const deleteHandler = (id) => { 
     if (window.confirm("Are you sure ?")) {
       dispatch(deletePage(id))
     }
   };
 
-  const createWebsite = (page) => {
-
+  const createWebsite = () => {
+    dispatch(createPage())
   }
 
   return (
@@ -37,13 +45,16 @@ const ManagePage = ({ match }) => {
           <h1>Websites</h1>
         </Col>
         <Col className="text-right">
-          <Button className="my-3" onClick={createWebsite}>
+          <Button className="my-3" onClick={()=>createWebsite()}>
             Create Your Website
           </Button>
         </Col>
       </Row>
       {loadingDelete && <Loader/>}
       {errorDelete && <Message variant='danger'> {errorDelete} </Message>}
+
+      {loadingCreate && <Loader/>}
+      {errorCreate && <Message variant='danger'> {errorCreate} </Message>}
       {loading ? (
         <Loader />
       ) : error ? (
