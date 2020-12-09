@@ -49,17 +49,17 @@ const ManagePage = ({ match,history }) => {
 
   return (
     <>
-      <Row className="align-items-center">
+      <Row className="align-items-center ">
         <Col>
           <h1 className='managepage-title'>Websites</h1>
-          <h4>To update a website click on the update icon</h4>
+          <h4  className='managepage-subtitle'>To update a website click on the update icon</h4>
           <h4 className='managepage-subtitle'>to delete a website click on the red icon</h4>
         </Col>
         <Col className="text-right">
           <Button className="my-3" onClick={()=>createWebsite()} style={{backgroundColor:'#343a40'}}>
             Create Your Website
           </Button>
-        </Col>
+        </Col >
       </Row>
       {loadingDelete && <Loader/>}
       {errorDelete && <Message variant='danger'> {errorDelete} </Message>}
@@ -71,7 +71,7 @@ const ManagePage = ({ match,history }) => {
       ) : error ? (
         <Message variant="danger"> {error} </Message>
       ) : (
-        <Table striped bordered hover responsive className="table-sm">
+        <Table striped bordered hover responsive className="table-sm ">
           <thead>
             <tr>
               <th>id</th>
