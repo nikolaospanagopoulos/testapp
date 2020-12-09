@@ -28,7 +28,7 @@ const PageEditScreen = ({ match,history }) => {
   useEffect(() => {
       if(successUpdate){
           dispatch({type:PAGES_UPDATE_RESET})
-          history.push('/admin/pagesList')
+          history.push('/admin/pageList')
       }else{
         if (page.id !== pageId) {
             dispatch(listPageDetails(pageId));
