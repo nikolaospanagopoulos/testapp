@@ -4,20 +4,25 @@ import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../Components/LoadingComponent/LoadingComponent";
 import Message from "../../Components/MessageComponent/Message";
-import { listPages } from "../../actions/pagesActions";
+import { listPages,deletePage } from "../../actions/pagesActions";
 
 const ManagePage = ({ match }) => {
   const dispatch = useDispatch();
   const pageList = useSelector((state) => state.pageList);
   const { loading, error, pages } = pageList;
 
+  const pageDelete = useSelector((state) => state.pageDelete);
+  const { loading:loadingDelete, error:errorDelete ,success:successDelete} = pageDelete;
+
+
+
   useEffect(() => {
     dispatch(listPages());
-  }, [dispatch]);
+  }, [dispatch,successDelete]);
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure ?")) {
-      //delete pages
+      dispatch(deletePage(id))
     }
   };
 
@@ -37,6 +42,8 @@ const ManagePage = ({ match }) => {
           </Button>
         </Col>
       </Row>
+      {loadingDelete && <Loader/>}
+      {errorDelete && <Message variant='danger'> {errorDelete} </Message>}
       {loading ? (
         <Loader />
       ) : error ? (
