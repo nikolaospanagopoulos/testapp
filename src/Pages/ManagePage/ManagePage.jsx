@@ -51,13 +51,13 @@ const ManagePage = ({ match,history }) => {
     <>
       <Row className="align-items-center ">
         <Col>
-          <h1 className='managepage-title'>Websites</h1>
+          <h1 className='managepage-title'>Pages</h1>
           <h4  className='managepage-subtitle'>To update a website click on the update icon</h4>
           <h4 className='managepage-subtitle'>to delete a website click on the red icon</h4>
         </Col>
         <Col className="text-right">
           <Button className="my-3" onClick={()=>createWebsite()} style={{backgroundColor:'#343a40'}}>
-            Create Your Website
+            Create Your page
           </Button>
         </Col >
       </Row>

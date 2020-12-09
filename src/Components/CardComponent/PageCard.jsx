@@ -11,7 +11,7 @@ const PageCard = ({ page }) => {
       <Card.Body>
         <Link to={`/page/${page.id}`}>
           <Card.Title as="h5">
-            <strong>website name:{page.title}</strong>
+            page title:{page.title}
           </Card.Title>
         </Link>
         <Card.Text as="h6">description :{page.description}</Card.Text>

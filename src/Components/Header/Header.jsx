@@ -19,10 +19,10 @@ const Header = () => {
                 
                 
                 
-                  <NavDropdown title='Manage Websites' id='adminmenu'>
+                  <NavDropdown title='Manage Pages' id='adminmenu'>
                     
                     <LinkContainer to='/admin/pageList'>
-                      <NavDropdown.Item>Websites</NavDropdown.Item>
+                      <NavDropdown.Item>Pages</NavDropdown.Item>
                     </LinkContainer>
                     
                   </NavDropdown>

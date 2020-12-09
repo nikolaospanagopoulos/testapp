@@ -6,7 +6,7 @@ import Message from "../../Components/MessageComponent/Message";
 import Loader from "../../Components/LoadingComponent/LoadingComponent";
 import { listPageDetails ,updatePage} from "../../actions/pagesActions";
 import { PAGES_UPDATE_RESET } from "../../constants/pagesConstants";
-
+import './PageEditScreen.css'
 
 const PageEditScreen = ({ match,history }) => {
   const pageId = match.params.id;
@@ -63,7 +63,7 @@ const PageEditScreen = ({ match,history }) => {
       </Link>
       <div>
       
-        <h1>Edit website</h1>
+        <h1 className='editpage-title'>Edit Page</h1>
         {loadingUpdate && <Loader/>}
         {errorUpdate && <Message variant='danger'> {errorUpdate} </Message>}
         {loading ? (
@@ -71,7 +71,7 @@ const PageEditScreen = ({ match,history }) => {
         ) : error ? (
           <Message variant="danger"> {error} </Message>
         ) : (
-          <Form onSubmit={submitHandler}>
+          <Form onSubmit={submitHandler} className='form-edit'>
 
 
             <Form.Group controlId="title">

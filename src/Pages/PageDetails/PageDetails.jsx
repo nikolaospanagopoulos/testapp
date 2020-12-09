@@ -33,7 +33,7 @@ const PageDetailsScreen = ({ match }) => {
         <h3 className='details-title'>Website Details</h3>
            <ListGroup className='page-details'>
                <ListGroup.Item>
-                   <h3> Website name: {page.title} </h3>
+                   <h3> Page title: {page.title} </h3>
                </ListGroup.Item>
                <ListGroup.Item>
                    <h3> description: {page.description} </h3>
@@ -45,7 +45,7 @@ const PageDetailsScreen = ({ match }) => {
                    <h3> published On: {page.publishedOn} </h3>
                </ListGroup.Item>
                <ListGroup.Item>
-                   <h3> active website: {page.isActive ? 'true' : 'false'}</h3>
+                   <h3> active page: {page.isActive ? 'true' : 'false'}</h3>
                </ListGroup.Item>
            </ListGroup>
         </Col>
