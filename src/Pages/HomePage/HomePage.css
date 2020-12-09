@@ -1,10 +1,12 @@
 .title{
     text-align: center;
     margin-bottom: 3rem;
+    text-shadow: 2px 1px;
 }
 
 .sub-title{
     text-align: center;
+    text-shadow: 1px 1px;
 }
 
 .button-text{
