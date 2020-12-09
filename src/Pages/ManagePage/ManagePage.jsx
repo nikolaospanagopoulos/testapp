@@ -26,7 +26,7 @@ const ManagePage = ({ match,history }) => {
       dispatch(listPages());
     }
     
-  }, [dispatch,successDelete,history,successCreate,createPage]);
+  }, [dispatch,successDelete,history,successCreate,createdPage]);
 
   const deleteHandler = (id) => { 
     if (window.confirm("Are you sure ?")) {

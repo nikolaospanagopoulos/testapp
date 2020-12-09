@@ -1,13 +1,14 @@
 import {createStore,combineReducers,applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
-import {pageListReducer,pageDetailsReducer,pageDeleteReducer,pageCreateReducer} from './reducers/pageReducers'
+import {pageListReducer,pageDetailsReducer,pageDeleteReducer,pageCreateReducer,pageUpdateReducer} from './reducers/pageReducers'
 
 const reducer = combineReducers({
     pageList:pageListReducer,
     pageDetails:pageDetailsReducer,
     pageDelete:pageDeleteReducer,
-    pageCreate:pageCreateReducer
+    pageCreate:pageCreateReducer,
+    pageUpdate:pageUpdateReducer
 })
 
 const initialState = {}
