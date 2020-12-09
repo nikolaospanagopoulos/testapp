@@ -1,6 +1,8 @@
 import {PAGES_LIST_REQUEST,PAGES_LIST_SUCCESS,PAGES_LIST_FAIL, PAGES_DETAILS_REQUEST, PAGES_DETAILS_SUCCESS, PAGES_DETAILS_FAIL, PAGES_DELETE_REQUEST, PAGES_DELETE_SUCCESS, PAGES_DELETE_FAIL,PAGES_CREATE_REQUEST,PAGES_CREATE_SUCCESS,PAGES_CREATE_FAIL, PAGES_UPDATE_REQUEST, PAGES_UPDATE_SUCCESS, PAGES_UPDATE_FAIL} from '../constants/pagesConstants'
 import axios from 'axios'
 
+//my actions mostly for dealing  create,delete,get and post of the api
+
 export const listPages = () => async (dispatch) => {
     try{
         dispatch({type:PAGES_LIST_REQUEST})

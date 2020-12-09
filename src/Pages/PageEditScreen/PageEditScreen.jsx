@@ -7,13 +7,14 @@ import Loader from "../../Components/LoadingComponent/LoadingComponent";
 import { listPageDetails ,updatePage} from "../../actions/pagesActions";
 import { PAGES_UPDATE_RESET } from "../../constants/pagesConstants";
 
+
 const PageEditScreen = ({ match,history }) => {
   const pageId = match.params.id;
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [type, setType] = useState(1);
-  
+  const [type, setType] = useState();
+  const [isActive, setIsActive] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -36,6 +37,7 @@ const PageEditScreen = ({ match,history }) => {
             setTitle(page.title);
             setDescription(page.description);
             setType(page.type);
+            
            
           }
       }
@@ -49,6 +51,7 @@ const PageEditScreen = ({ match,history }) => {
         title,
         description,
         type,
+        isActive,
         publishedOn: new Date()
     }))
   };
@@ -59,6 +62,7 @@ const PageEditScreen = ({ match,history }) => {
         Go Back
       </Link>
       <div>
+      
         <h1>Edit website</h1>
         {loadingUpdate && <Loader/>}
         {errorUpdate && <Message variant='danger'> {errorUpdate} </Message>}
@@ -75,7 +79,7 @@ const PageEditScreen = ({ match,history }) => {
               <Form.Control
                 type="text"
                 placeholder="enter title"
-                value={page.title}
+                value={title}
                 onChange={(e) => setTitle(e.target.value)}
               ></Form.Control>
             </Form.Group>
@@ -85,7 +89,7 @@ const PageEditScreen = ({ match,history }) => {
               <Form.Control
                 type="text"
                 placeholder="enter description"
-                value={page.description}
+                value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></Form.Control>
             </Form.Group>
@@ -93,20 +97,32 @@ const PageEditScreen = ({ match,history }) => {
             <Form.Group controlId="type">
               <Form.Label> Type </Form.Label>
               <Form.Control
-                type="number"
+                type='number'
                 placeholder="enter type"
-                value={page.type}
+                value={type}
                 onChange={(e) => setType(e.target.value)}
               ></Form.Control>
             </Form.Group>
 
             
+            <Form.Group>
+             
+            <Form.Check
+            type="checkbox" 
+            label="is the website active?"
+            value={isActive}
+            onChange={()=>setIsActive(!isActive)}
+             />
+            </Form.Group>
+
+
             <Button type="submit" variant="primary">
               {" "}
               Update{" "}
             </Button>
           </Form>
         )}
+      
       </div>
     </>
   );

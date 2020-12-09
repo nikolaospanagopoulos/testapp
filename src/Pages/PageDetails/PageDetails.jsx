@@ -7,12 +7,18 @@ import Loader from '../../Components/LoadingComponent/LoadingComponent'
 import Message from '../../Components/MessageComponent/Message'
 import './PageDetails.css'
 
+
+
+
 const PageDetailsScreen = ({ match }) => {
   const dispatch = useDispatch();
+
+  //i destructure what i want from my state
   const pageDetails = useSelector((state) => state.pageDetails);
   const { loading, error, page } = pageDetails;
 
   useEffect(() => {
+    //i get the id of the page by using the url parameters so i use the match prop
     dispatch(listPageDetails(match.params.id));
   }, [dispatch, match]);
 

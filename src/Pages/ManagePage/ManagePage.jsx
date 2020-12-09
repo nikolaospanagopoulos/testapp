@@ -6,8 +6,14 @@ import Loader from "../../Components/LoadingComponent/LoadingComponent";
 import Message from "../../Components/MessageComponent/Message";
 import { listPages,deletePage,createPage } from "../../actions/pagesActions";
 import {PAGES_CREATE_RESET} from '../../constants/pagesConstants'
+import './ManagePage.css'
+
+
+//i use the history prop so that i can redirect automaticaly 
 const ManagePage = ({ match,history }) => {
   const dispatch = useDispatch();
+
+  //i destructure what i need from my redux store state
   const pageList = useSelector((state) => state.pageList);
   const { loading, error, pages } = pageList;
 
@@ -19,6 +25,7 @@ const ManagePage = ({ match,history }) => {
 
 
   useEffect(() => {
+    //we reset the state so that when we return to this page we don't see any messages
     dispatch({type:PAGES_CREATE_RESET})
     if(successCreate){
       history.push(`/admin/page/${createdPage.id}/edit`)
@@ -29,11 +36,13 @@ const ManagePage = ({ match,history }) => {
   }, [dispatch,successDelete,history,successCreate,createdPage]);
 
   const deleteHandler = (id) => { 
+    //i add this window message in order to prevent an involuntary deletion
     if (window.confirm("Are you sure ?")) {
       dispatch(deletePage(id))
     }
   };
 
+  //i dispatch the create website action
   const createWebsite = () => {
     dispatch(createPage())
   }
@@ -42,9 +51,9 @@ const ManagePage = ({ match,history }) => {
     <>
       <Row className="align-items-center">
         <Col>
-          <h1>Websites</h1>
+          <h1 className='managepage-title'>Websites</h1>
           <h4>To update a website click on the update icon</h4>
-          <h4 style={{marginBottom:'2rem'}}>to delete a website click on the red icon</h4>
+          <h4 className='managepage-subtitle'>to delete a website click on the red icon</h4>
         </Col>
         <Col className="text-right">
           <Button className="my-3" onClick={()=>createWebsite()}>
