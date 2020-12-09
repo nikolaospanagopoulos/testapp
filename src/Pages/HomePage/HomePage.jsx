@@ -34,6 +34,7 @@ const HomePage = () => {
       <Button
         className="homepage-button"
         type="button"
+        
         onClick={() => clickHandler()}
       >
         {" "}
