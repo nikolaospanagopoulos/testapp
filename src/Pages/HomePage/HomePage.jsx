@@ -46,7 +46,7 @@ const HomePage = () => {
       </Button>
       <h2 className="title">Our Customers' websites</h2>
       <h3 className="sub-title">Click on a card to know more</h3>
-      <h5 className="sub-title">or click manage websites to create update or delete your websites</h5>
+      <h5 className="sub-title">or click manage websites to create, update or delete your websites</h5>
       {loading ? (
         <Loader />
       ) : error ? (

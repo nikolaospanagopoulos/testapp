@@ -56,7 +56,7 @@ const ManagePage = ({ match,history }) => {
           <h4 className='managepage-subtitle'>to delete a website click on the red icon</h4>
         </Col>
         <Col className="text-right">
-          <Button className="my-3" onClick={()=>createWebsite()}>
+          <Button className="my-3" onClick={()=>createWebsite()} style={{backgroundColor:'#343a40'}}>
             Create Your Website
           </Button>
         </Col>
