@@ -5,6 +5,7 @@ import { listPageDetails } from "../../actions/pagesActions";
 import { Link } from "react-router-dom";
 import Loader from '../../Components/LoadingComponent/LoadingComponent'
 import Message from '../../Components/MessageComponent/Message'
+import './PageDetails.css'
 
 const PageDetailsScreen = ({ match }) => {
   const dispatch = useDispatch();
@@ -19,9 +20,12 @@ const PageDetailsScreen = ({ match }) => {
     <>
       <Link className="btn btn-dark my-3" to='/'> Go Back </Link>
       {loading ? <Loader/> : error ? <Message variant='danger'> {error} </Message> : (
+        
         <Row>
+          
         <Col>
-           <ListGroup>
+        <h3 className='details-title'>Website Details</h3>
+           <ListGroup className='page-details'>
                <ListGroup.Item>
                    <h3> Website name: {page.title} </h3>
                </ListGroup.Item>
@@ -29,7 +33,13 @@ const PageDetailsScreen = ({ match }) => {
                    <h3> description: {page.description} </h3>
                </ListGroup.Item>
                <ListGroup.Item>
+                   <h3> page type: {page.type} </h3>
+               </ListGroup.Item>
+               <ListGroup.Item>
                    <h3> published On: {page.publishedOn} </h3>
+               </ListGroup.Item>
+               <ListGroup.Item>
+                   <h3> active website: {page.isActive ? 'true' : 'false'}</h3>
                </ListGroup.Item>
            </ListGroup>
         </Col>

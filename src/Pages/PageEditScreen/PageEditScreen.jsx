@@ -75,7 +75,7 @@ const PageEditScreen = ({ match,history }) => {
               <Form.Control
                 type="text"
                 placeholder="enter title"
-                value={title}
+                value={page.title}
                 onChange={(e) => setTitle(e.target.value)}
               ></Form.Control>
             </Form.Group>
@@ -85,7 +85,7 @@ const PageEditScreen = ({ match,history }) => {
               <Form.Control
                 type="text"
                 placeholder="enter description"
-                value={description}
+                value={page.description}
                 onChange={(e) => setDescription(e.target.value)}
               ></Form.Control>
             </Form.Group>
@@ -95,7 +95,7 @@ const PageEditScreen = ({ match,history }) => {
               <Form.Control
                 type="number"
                 placeholder="enter type"
-                value={type}
+                value={page.type}
                 onChange={(e) => setType(e.target.value)}
               ></Form.Control>
             </Form.Group>
