@@ -14,7 +14,7 @@ const PageEditScreen = ({ match,history }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState();
-  const [isActive, setIsActive] = useState(false);
+  
 
   const dispatch = useDispatch();
 
@@ -24,12 +24,12 @@ const PageEditScreen = ({ match,history }) => {
 
   const pageUpdate = useSelector((state) => state.pageUpdate);
   const { loading:loadingUpdate, error:errorUpdate, success:successUpdate } = pageUpdate;
-
+  const [isActive, setIsActive] = useState(Boolean);
 
   useEffect(() => {
       if(successUpdate){
           dispatch({type:PAGES_UPDATE_RESET})
-          history.push('/admin/pageList')
+          history.goBack()
       }else{
         if (page.id !== pageId) {
             dispatch(listPageDetails(pageId));
@@ -37,6 +37,7 @@ const PageEditScreen = ({ match,history }) => {
             setTitle(page.title);
             setDescription(page.description);
             setType(page.type);
+            setIsActive(page.isActive)
             
            
           }
@@ -58,9 +59,8 @@ const PageEditScreen = ({ match,history }) => {
 
   return (
     <>
-      <Link to="/admin/pageList" className="btn btn-dark my-3">
-        Go Back
-      </Link>
+
+      <Button onClick={()=>history.goBack()}>Go back</Button>
       <div>
       
         <h1 className='editpage-title'>Edit Page</h1>
@@ -78,7 +78,7 @@ const PageEditScreen = ({ match,history }) => {
               <Form.Label> Title </Form.Label>
               <Form.Control
                 type="text"
-                placeholder="enter title"
+                placeholder={page.title}
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               ></Form.Control>
@@ -88,7 +88,7 @@ const PageEditScreen = ({ match,history }) => {
               <Form.Label> Description </Form.Label>
               <Form.Control
                 type="text"
-                placeholder="enter description"
+                placeholder={page.description}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               ></Form.Control>
@@ -98,20 +98,21 @@ const PageEditScreen = ({ match,history }) => {
               <Form.Label> Type </Form.Label>
               <Form.Control
                 type='number'
-                placeholder="enter type"
+                placeholder={page.type}
                 value={type}
                 onChange={(e) => setType(e.target.value)}
               ></Form.Control>
             </Form.Group>
 
             
-            <Form.Group>
+            <Form.Group controlId='isactive'>
              
             <Form.Check
             type="checkbox" 
             label="is the website active?"
+            
             value={isActive}
-            onChange={()=>setIsActive(!isActive)}
+            onChange={(e)=>setIsActive(e.target.checked)}
              />
             </Form.Group>
 

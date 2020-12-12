@@ -25,6 +25,7 @@ const PageDetailsScreen = ({ match }) => {
   return (
     <>
       <Link className="btn btn-dark my-3" to='/'> Go Back </Link>
+      <Link className="btn btn-dark my-3" to={`/admin/page/${page.id}/edit`}> edit website </Link>
       {loading ? <Loader/> : error ? <Message variant='danger'> {error} </Message> : (
         
         <Row>
