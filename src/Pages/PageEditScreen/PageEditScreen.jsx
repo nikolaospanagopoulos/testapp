@@ -3,81 +3,79 @@ import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../../Components/MessageComponent/Message";
 import Loader from "../../Components/LoadingComponent/LoadingComponent";
-import { listPageDetails ,updatePage} from "../../actions/pagesActions";
+import { listPageDetails, updatePage } from "../../actions/pagesActions";
 import { PAGES_UPDATE_RESET } from "../../constants/pagesConstants";
-import './PageEditScreen.css'
+import "./PageEditScreen.css";
 
-const PageEditScreen = ({ match,history }) => {
+const PageEditScreen = ({ match, history }) => {
   const pageId = match.params.id;
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [type, setType] = useState();
-  
-
+  let [type, setType] = useState(Number);
+ 
   const dispatch = useDispatch();
 
   const pageDetails = useSelector((state) => state.pageDetails);
   const { loading, error, page } = pageDetails;
 
-
   const pageUpdate = useSelector((state) => state.pageUpdate);
-  const { loading:loadingUpdate, error:errorUpdate, success:successUpdate } = pageUpdate;
-  const [isActive, setIsActive] = useState(Boolean);
-
+  const {
+    loading: loadingUpdate,
+    error: errorUpdate,
+    success: successUpdate,
+  } = pageUpdate;
+  
+  const [isActive,setIsActive] = useState(false)
   useEffect(() => {
-      if(successUpdate){
-          dispatch({type:PAGES_UPDATE_RESET})
-          history.goBack()
-      }else{
-        if (page.id !== pageId) {
-            dispatch(listPageDetails(pageId));
-          } else {
-            setTitle(page.title);
-            setDescription(page.description);
-            setType(page.type);
-            setIsActive(page.isActive)
-            
-           
-          }
+    if (successUpdate) {
+      dispatch({ type: PAGES_UPDATE_RESET });
+      history.goBack();
+    } else {
+      if (!page.title || page.id != pageId) {
+        dispatch(listPageDetails(pageId));
+      } else {
+        setTitle(page.title);
+        setDescription(page.description);
+        setType(page.type);
+        setIsActive(page.isActive);
       }
-   
-  }, [dispatch, pageId, page,history,successUpdate]);
+    }
+  }, [dispatch, pageId, page, history, successUpdate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(updatePage({
-        id:pageId,
+    dispatch(
+      updatePage({
+        id: pageId,
         title,
         description,
         type,
         isActive,
         publishedOn: new Date()
-    }))
+      })
+    );
   };
 
   return (
     <>
-
-      <Button onClick={()=>history.goBack()}>Go back</Button>
+      <Button onClick={() => history.goBack()}>Go back</Button>
       <div>
-      
-        <h1 className='editpage-title'>Edit Page</h1>
-        {loadingUpdate && <Loader/>}
-        {errorUpdate && <Message variant='danger'> {errorUpdate} </Message>}
-        {loading ? (
+        <h1 className="editpage-title">Edit Page</h1>
+        {loadingUpdate ? (
+          <Loader />
+        ) : errorUpdate ? (
+          <Message variant="danger"> {errorUpdate} </Message>
+        ) : loading ? (
           <Loader />
         ) : error ? (
-          <Message variant="danger"> {error} </Message>
+          <Message> {error} </Message>
         ) : (
-          <Form onSubmit={submitHandler} className='form-edit'>
-
-
+          <Form onSubmit={submitHandler} className="form-edit">
             <Form.Group controlId="title">
               <Form.Label> Title </Form.Label>
               <Form.Control
-                type="text"
-                placeholder={page.title}
+                type="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               ></Form.Control>
@@ -96,33 +94,31 @@ const PageEditScreen = ({ match,history }) => {
             <Form.Group controlId="type">
               <Form.Label> Type </Form.Label>
               <Form.Control
-                type='number'
+                type="number"
+                
                 placeholder={page.type}
                 value={type}
                 onChange={(e) => setType(e.target.value)}
               ></Form.Control>
             </Form.Group>
 
-            
-            <Form.Group controlId='isactive'>
-             
-            <Form.Check
-            type="checkbox" 
-            label="is the website active?"
-            
-            value={isActive}
-            onChange={(e)=>setIsActive(e.target.checked)}
-             />
+            <Form.Group controlId="isActive">
+              <Form.Check
+                
+                label="is the website active?"
+                checked={isActive}
+                onChange={(e) => setIsActive(e.target.checked)}
+              />
             </Form.Group>
-
 
             <Button type="submit" variant="primary">
               {" "}
               Update{" "}
             </Button>
+
+            <h6 className='more-inforamtion'>*type 0 means menu , type 1 means events. type 2 means content</h6>
           </Form>
         )}
-      
       </div>
     </>
   );

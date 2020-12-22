@@ -1,8 +1,13 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import moment from 'moment';
+
+
 import CardBackground from "../../images/www.jpg";
 const PageCard = ({ page }) => {
+  let date = moment(page.publishedOn)
+  date = String(date)
   return (
     <Card className="card">
       <Link to={`/page/${page.id}`}>
@@ -15,7 +20,7 @@ const PageCard = ({ page }) => {
           </Card.Title>
         </Link>
         <Card.Text as="h6">description :{page.description}</Card.Text>
-        <Card.Text as="p">published on :{page.publishedOn}</Card.Text>
+        <Card.Text as="p">{date} </Card.Text>
       </Card.Body>
     </Card>
   );

@@ -24,9 +24,16 @@ const HomePage = () => {
     pages = pages.filter((page) => !page.isActive);
   }
 
+
+
+
+
   //i use the useEffect hook so that i fetch the data when the website is rendered
   useEffect(() => {
-    dispatch(listPages());
+    dispatch(listPages())
+     
+   
+   
   }, [dispatch]);
 
   return (

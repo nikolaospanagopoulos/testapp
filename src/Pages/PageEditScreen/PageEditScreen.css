@@ -5,3 +5,10 @@
 .editpage-title{
     text-align: center;
 }
+
+
+.more-inforamtion{
+  text-align: center;
+  position: relative;
+  top: 14vh;
+}
