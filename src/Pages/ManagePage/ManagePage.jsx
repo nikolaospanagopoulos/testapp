@@ -78,7 +78,7 @@ const ManagePage = ({ history }) => {
       ) : errorCreate ? (
         <Message variant="danger"> {errorCreate} </Message>
       ) : (
-        <Table striped bordered hover responsive className="table-md ">
+        <Table striped bordered hover responsive className="table " >
           <thead>
             <tr>
               <th>title</th>

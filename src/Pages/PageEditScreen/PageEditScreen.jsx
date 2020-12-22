@@ -30,9 +30,10 @@ const PageEditScreen = ({ match, history }) => {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: PAGES_UPDATE_RESET });
+      dispatch(listPageDetails(pageId));
       history.goBack();
     } else {
-      if (!page.title || page.id != pageId) {
+      if (!page.title) {
         dispatch(listPageDetails(pageId));
       } else {
         setTitle(page.title);
