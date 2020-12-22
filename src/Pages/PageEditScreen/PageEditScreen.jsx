@@ -13,7 +13,7 @@ const PageEditScreen = ({ match, history }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   let [type, setType] = useState(Number);
- 
+
   const dispatch = useDispatch();
 
   const pageDetails = useSelector((state) => state.pageDetails);
@@ -25,8 +25,8 @@ const PageEditScreen = ({ match, history }) => {
     error: errorUpdate,
     success: successUpdate,
   } = pageUpdate;
-  
-  const [isActive,setIsActive] = useState(false)
+
+  const [isActive, setIsActive] = useState(false);
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: PAGES_UPDATE_RESET });
@@ -52,7 +52,7 @@ const PageEditScreen = ({ match, history }) => {
         description,
         type,
         isActive,
-        publishedOn: new Date()
+        publishedOn: new Date(),
       })
     );
   };
@@ -62,12 +62,10 @@ const PageEditScreen = ({ match, history }) => {
       <Button onClick={() => history.goBack()}>Go back</Button>
       <div>
         <h1 className="editpage-title">Edit Page</h1>
-        {loadingUpdate ? (
+        {loadingUpdate || loading ? (
           <Loader />
         ) : errorUpdate ? (
           <Message variant="danger"> {errorUpdate} </Message>
-        ) : loading ? (
-          <Loader />
         ) : error ? (
           <Message> {error} </Message>
         ) : (
@@ -95,7 +93,6 @@ const PageEditScreen = ({ match, history }) => {
               <Form.Label> Type </Form.Label>
               <Form.Control
                 type="number"
-                
                 placeholder={page.type}
                 value={type}
                 onChange={(e) => setType(e.target.value)}
@@ -104,7 +101,6 @@ const PageEditScreen = ({ match, history }) => {
 
             <Form.Group controlId="isActive">
               <Form.Check
-                
                 label="is the website active?"
                 checked={isActive}
                 onChange={(e) => setIsActive(e.target.checked)}
@@ -116,7 +112,9 @@ const PageEditScreen = ({ match, history }) => {
               Update{" "}
             </Button>
 
-            <h6 className='more-inforamtion'>*type 0 means menu , type 1 means events. type 2 means content</h6>
+            <h6 className="more-inforamtion">
+              *type 0 means menu , type 1 means events. type 2 means content
+            </h6>
           </Form>
         )}
       </div>
